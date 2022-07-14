@@ -21,11 +21,23 @@ def mockDummyFunction():
     return "2"
 
 
-def test_landing_aliases(client):
+# def test_landing_aliases(client):
+#     #print(client.get("/read").data)
+#     with mock.patch('app.app.readapi.dummyFuncForMock') as mock_method:
+#             mock_method.return_value = "2"
+#             assert client.get("/read").data.decode('UTF-8') == "hello read api 2"
+#             mock_method.assert_called_once()
+
+
+def test_landing_aliases1(client):
     #print(client.get("/read").data)
-    with mock.patch('app.app.readapi.dummyFuncForMock') as mock_method:
+    #important the complete path like 'requests.post' should be there in the source class as well
+    # if it has from requests import post at the top and then just post call...
+    # the mock patch won't work
+    with mock.patch('requests.post') as mock_method:
             mock_method.return_value = "2"
-            assert client.get("/read").data.decode('UTF-8') == "hello read api 2"
+            data = client.get("/readnew").data.decode('UTF-8')
+            assert data == "hello read api post 2"
             mock_method.assert_called_once()
 
     

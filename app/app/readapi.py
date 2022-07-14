@@ -1,6 +1,6 @@
 from flask import Flask, request
 import http
-import urllib3
+import requests
 
 app = Flask(__name__)
 
@@ -18,13 +18,14 @@ def read():
 
 @app.route('/readnew',methods=['POST', 'GET'])
 def readnew():
-    http_pool = urllib3.poolmanager
-    http_pool.PoolManager().request(method='post',data = [])
+    # http_pool = urllib3.poolmanager
+    # http_pool.PoolManager().request(method='post',data = [])
     
 
-    print(request)
+    # print(request)
+    resp = requests.post("http://google.com")
     x = dummyFuncForMock()
-    return "hello read api " + x, 200
+    return "hello read api post " + resp, 200
 
 
 
